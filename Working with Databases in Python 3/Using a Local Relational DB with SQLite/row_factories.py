@@ -95,7 +95,7 @@ def get_investment_value(coin_id, currency):
     buy_result = cursor.execute(sql, (coin_id, currency, False)).fetchall()
     sell_result = cursor.execute(sql, (coin_id, currency, True)).fetchall()
     sell_amount = sum([row.amount for row in sell_result])
-    buy_amount = sum([row.amount for row in buy_result])
+    buy_amount = sum([row for row in buy_result])
     total_value = (buy_amount - sell_amount) * coin_price
 
 
