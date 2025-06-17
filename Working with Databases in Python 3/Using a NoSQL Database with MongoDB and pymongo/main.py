@@ -2,7 +2,7 @@ import requests
 import click
 import datetime
 
-from mongita import MongitaClientDisk
+from pymongo import MongoClient
 
 
 
@@ -59,6 +59,7 @@ cli.add_command(show_coin_prices)
 cli.add_command(add_investment)
 
 
+
 @click.command()
 @click.option("--coin_id", default="bitcoin")
 @click.option("--currency", default="usd")
@@ -73,6 +74,7 @@ def get_investment_value(coin_id, currency):
 
     print(f"Total amount of {coin_id} in {currency.upper()}: {total_value:.2f}")
 
+cli.add_command(get_investment_value)
 # @click.command()
 # @click.option("--csv_file")
 
@@ -86,11 +88,11 @@ def get_investment_value(coin_id, currency):
 
 #         print(f"Imported {len(rows)} investments from {csv_file}.")
 
-cli.add_command(get_investment_value)
+
 # cli.add_command(import_investments)
 
 if __name__ == "__main__":
-    client = MongitaClientDisk()
+    client = MongoClient("mongodb://localhost:27017/")  # Connect to MongoDB
     db = client.portfolio
     investments = db.investments
     cli()
