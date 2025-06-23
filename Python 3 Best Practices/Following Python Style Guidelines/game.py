@@ -17,11 +17,12 @@ __author__ = "Abi Franklin"
 # The groups should be separated by a single blank line
 import random
 
-from gamedemo import weapons, player
+from gamedemo import Player
 
 
 # Two blank lines before and after top level classes and functions
 class Game:
+
     def __init__(self, player1, player2):
         self.p1 = player1
         self.p2 = player2
@@ -39,10 +40,8 @@ class Game:
             else:
                 attacker = self.p2
                 defender = self.p1
-            dmg, sound = attacker.weapon.attack()
-            print(attacker.name, "attacks:", sound)
-            print(defender.name, "takes", dmg, "damage")
-            defender.take_hit(dmg)
+            print(attacker.name, "attacks")
+            print(defender.name, "takes damage")
         print(attacker.name, "won with", attacker.health, "health left")
 
 
@@ -50,8 +49,8 @@ class Game:
 if __name__ == "__main__":
     random.seed()
     g = Game(
-        player.Player("The Knight", weapons.Sword()),
-        player.Player("The Dragon", weapons.FireBreath()),
+        Player("The Knight", "sword"),
+        Player("The Dragon", "firebreath"),
     )
     g.run()
 
