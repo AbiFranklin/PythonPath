@@ -1,5 +1,5 @@
 import random
-from gamedemo import Player, Weapon
+from gamedemo import Weapon, Player
 
 
 class Game:
